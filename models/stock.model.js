@@ -44,20 +44,12 @@ var findByKey = function (key,val,db, callback) {
 }
 
 
-module.exports.findBySymbol = function (req, res) {
+module.exports.findByKey = function (req, res) {
     mongoClient.connect(url, function (err, client) {
-        findByKey('symbol',req.params.symbol,client.db(dbName), function (data) {
+        findByKey(req.params.key,req.params.val,client.db(dbName), function (data) {
             client.close();
             res.send(data);
         });
     });
 
-}
-module.exports.findByDate = function(req,res){
-    mongoClient.connect(url,function(err,client){
-        findByKey('date',req.params.date,client.db(dbName),function(data){
-            client.close();
-            res.send(data);
-        });
-    });
 }
