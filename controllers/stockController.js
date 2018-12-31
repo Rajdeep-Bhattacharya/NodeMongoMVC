@@ -10,7 +10,9 @@ exports.findAll = function (req, res) {
 }
 
 exports.findBySymbol = function (req, res) {
-
     model.findBySymbol(req,res);
+}
 
+exports.findByDate = function(req,res){
+    model.findByDate(req,res);
 }

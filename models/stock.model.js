@@ -13,7 +13,7 @@ var findAllDocuments = function (db, callback) {
         callback;
     }); */
     // better way of making calls 
-    var stream = collection.find({ symbol: "ADM" }, { symbol: 1, _id: 0, data: 1 }).stream();
+    var stream = collection.find({ symbol:1,_id:0,data:1,open:0,close:0,low:0,high:0,volume:0 }).stream();
     var data = [];
     stream.on("data", function (item) { console.log(item); data.push(item) });
     stream.on("end", function () { return callback(data) });
@@ -28,9 +28,11 @@ module.exports.findAll = function (req, res) {
 
     });
 }
-var findBySymbol = function (symbol,db, callback) {
+var findByKey = function (key,val,db, callback) {
     var collection = db.collection(collectionName);
-    var stream = collection.find({symbol:symbol}).stream();
+    var query ={};
+    query[key]=val;
+    var stream = collection.find(query).stream();
     var data=[];
     stream.on('data',function(item){
         console.log(item);
@@ -44,10 +46,18 @@ var findBySymbol = function (symbol,db, callback) {
 
 module.exports.findBySymbol = function (req, res) {
     mongoClient.connect(url, function (err, client) {
-        findBySymbol(req.params.symbol,client.db(dbName), function (data) {
+        findByKey('symbol',req.params.symbol,client.db(dbName), function (data) {
             client.close();
             res.send(data);
         });
     });
 
+}
+module.exports.findByDate = function(req,res){
+    mongoClient.connect(url,function(err,client){
+        findByKey('date',req.params.date,client.db(dbName),function(data){
+            client.close();
+            res.send(data);
+        });
+    });
 }
