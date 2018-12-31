@@ -1,11 +1,11 @@
 const express = require('express');
 const router = express.Router();
-const productController = require('../controllers/productController');
+const stockController = require('../controllers/stockController');
 
-router.get('/test',productController.test);
-router.get('/findAll',productController.findAll);
+router.get('/test',stockController.test);
+router.get('/findAll',stockController.findAll);
 router.get('/find/:symbol',(req,res)=>{
-    productController.findBySymbol(req,res);
+    stockController.findBySymbol(req,res);
 });
 
 /* router.post('/create',productController.create);
