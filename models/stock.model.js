@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 var mongoClient = require('mongodb').MongoClient;
 require('dotenv').config();
 require('dotenv').load();
@@ -81,7 +82,7 @@ var deleteByKey = function (key, val, db, callback) {
     collection.remove(query, { w: 1 }, function (err, result) {
 
         if (err !== null) {
-            console.log('failed to delete');
+            //console.log('failed to delete');
             callback(err);
         }
         else {
@@ -108,6 +109,7 @@ var update = function (date, symbol, col, db, callback) {
     var query = {};
     query['date'] = date;
     query['symbol'] = symbol;
+    
    /*  collection.find(query,function(err,result){
         console.log('printing cursor');
         console.log(result);
@@ -125,8 +127,8 @@ var update = function (date, symbol, col, db, callback) {
 
 module.exports.update = function (req, res) {
     mongoClient.connect(url, function (err, client) {
-        console.log(req.body);
-        console.log(err);
+        //console.log(req.body);
+        //console.log(err);
         if (err === null) {
             update(req.params.date, req.params.symbol, req.body, client.db(dbName), function (result) {
                 client.close();

@@ -1,3 +1,4 @@
+/* eslint-disable no-undef */
 const model = require('../models/stock.model');
 
 exports.test = function (req, res) {

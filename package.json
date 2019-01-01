@@ -11,8 +11,11 @@
   "dependencies": {
     "body-parser": "^1.18.3",
     "dotenv": "^6.2.0",
+    "eslint": "^5.11.1",
     "express": "^4.16.4",
     "mongodb": "^3.1.10",
-    
+    "pug": "^2.0.3",
+    "react": "^16.7.0",
+    "react-dom": "^16.7.0"
   }
 }
