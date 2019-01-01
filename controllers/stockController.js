@@ -13,4 +13,18 @@ exports.findByKey = function (req, res) {
     model.findByKey(req,res);
 }
 
+exports.create= function(req,res){
+    model.create(req,res);
+}
 
+exports.update = function(req,res){
+    model.update(req,res);
+}
+
+exports.delete = function(req,res){
+    model.delete(req,res);
+}
+
+exports.update = function(req,res){
+    model.update(req,res);
+}
