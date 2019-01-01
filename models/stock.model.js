@@ -103,17 +103,17 @@ module.exports.delete = function (req, res) {
 
 }
 
-var update = function (date, symbol, collection, db, callback) {
+var update = function (date, symbol, col, db, callback) {
     var collection = db.collection(collectionName);
     var query = {};
-    query[date] = date;
-    query[symbol] = symbol;
-    collection.find(query,{w:1},function(err,result){
+    query['date'] = date;
+    query['symbol'] = symbol;
+   /*  collection.find(query,function(err,result){
         console.log('printing cursor');
         console.log(result);
-    });
-    collection.update(query, { $set:  collection  },  function (err, result) {
-        if (err !== null) {
+    }); */
+    collection.updateOne(query, { $set:  col  },  function (err, result) {
+        if (err === null) {
             callback(result);
         }
         else
@@ -126,7 +126,8 @@ var update = function (date, symbol, collection, db, callback) {
 module.exports.update = function (req, res) {
     mongoClient.connect(url, function (err, client) {
         console.log(req.body);
-        if (err !== null) {
+        console.log(err);
+        if (err === null) {
             update(req.params.date, req.params.symbol, req.body, client.db(dbName), function (result) {
                 client.close();
                 res.send(result);
